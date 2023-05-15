@@ -1,5 +1,5 @@
 # readPSIDdata
-This repository contains R code to read the downloaded data from PSID from Umich on R. It contains instructions on using statat within R to transform the data from Stata into R (*.Rdata files), and then how to read it once it is used. It also explains a challenge of variable names.
+This repository contains R code to read the downloaded data from PSID from Umich on R. It contains instructions on using Stata within R to transform the data from Stata into R (*.Rdata files), and then how to read it once it is used. It also explains a challenge of variable names.
 
 Citations and references to this code is the best reward for me.
 
