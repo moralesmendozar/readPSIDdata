@@ -1,0 +1,115 @@
+@echo off
+
+//this code is to be run on terminal (Windows only)...
+//echo shows the current folder, like print on matlab...
+
+rem Set the root folder path
+set root_folder=C:/Users/username/FolderToFiles/PSID_Public
+
+
+
+rem cd C:/Users/username/FolderToFiles/PSID_Public
+rem C:\example\root
+
+rem Set the list of specified numbers
+set specified_numbers= fam1996er fam1997er fam1999er
+
+rem Change the current directory to the root folder
+cd %root_folder%
+
+rem Get a list of all sub-folders in the root folder
+rem for /D %%d in (*) do (
+for /d %i in (%root_folder%/*) do (
+
+  rem Check if the folder name contains one of the specified numbers
+  for %n in (%specified_numbers%) do (
+    if "%i" == "*%n*" (
+
+      rem Set the source folder path
+      set source_folder=%root_folder%/%i
+
+      rem Set the destination folder path
+      set destination_folder=C:/Users/username/FolderToFiles/PSID_Public/%i
+
+      rem Change the current directory to the source folder
+      cd %source_folder%
+
+      rem Get a list of all .do files in the source folder
+      for %f in (*.do) do (
+
+        rem Get the file name without the extension
+        rem set filename=%%~nf
+
+        rem Copy each .txt file from the source folder to the destination folder
+	rem copy FAM1996ER.do columns.txt
+        copy "%source_folder%/%f" %source_folder%/columns.txt
+
+        rem echo File "%%f" in folder "%%d" successfully copied as "columns.txt"
+      )
+
+      rem echo All .do files in folder "%%d" successfully copied and renamed to .txt
+    )
+  )
+)
+
+
+
+
+
+@echo off
+
+set root_folder=C:/Users/username/FolderToFiles/PSID_Public
+
+set specified_numbers= fam2017er fam2019er
+cd %root_folder%
+
+for /d %i in (*) do (
+
+  for %n in (%specified_numbers%) do (
+    if "%i" == "%n" (
+      cd %root_folder%/%i
+
+      for %f in (*.do) do (
+	copy %f columns.txt
+	copy %f labels.txt
+      )
+    )
+  )
+)
+
+rem echo All .txt files in specified folders successfully copied and renamed to columns.txt
+rem pause
+
+
+
+
+
+
+//the next code is run on terminal in order to open the codebook pdfs of all files
+rem In order to open all pdfs:
+set root_folder=C:/Users/username/FolderToFiles/PSID_Public
+set specified_numbers= 1980 1981 1988 1991 1992 1993
+cd %root_folder%
+for /d %i in (%specified_numbers%) do (
+	cd %root_folder%/fam%i
+	start fam%i_codebook.pdf
+)
+
+rem or...
+set root_folder=C:/Users/username/FolderToFiles/PSID_Public
+set specified_numbers= fam1968 fam1983
+cd %root_folder%
+for /d %i in (*) do (
+	for %n in (%specified_numbers%) do (
+    		if "%i" == "%n" (
+			explorer.exe %i_codebook.pdf
+		)
+	)
+)
+
+
+
+
+
+
+
